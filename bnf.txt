@@ -1,0 +1,78 @@
+<program> ::= <identifier> ":" <block> ENDP <identifier> "."
+
+<block> ::= DECLARATIONS <declaration_block> CODE <statement_list> 
+			| CODE <statement_list>
+			
+<identifier_list> ::= <identifier> | <identifier> "," <identifier_list>
+
+<declaration_block> ::= <identifier_list> OF TYPE <type> ";" 						
+						| <identifier_list> OF TYPE <type> ";" <declaration_block> 						
+
+<type> ::= INTEGER | CHARACTER | REAL
+
+<statement_list> ::= <statement> | <statement_list> ";" <statement>
+
+<statement> ::= <assignment_statement> 
+						| <if_statement> 
+						| <do_statement> 
+						| <while_statement> 
+						| <for_statement> 
+						| <write_statement> 
+						| <read_statement>
+
+<assignment_statement> ::= <expression> "->" <identifier>
+
+<if_statement> ::= IF <conditional> THEN <statement_list> ENDIF 
+				   | IF <conditional> THEN <statement_list> ELSE <statement_list> ENDIF
+
+<do_statement> ::= DO <statement_list> WHILE <conditional> ENDDO
+
+<while_statement> ::= WHILE <conditional> DO <statement_list> ENDWHILE
+
+<for_statement> ::= FOR <identifier> IS <expression> BY <expression> TO <expression> 
+					DO <statement_list> ENDFOR
+<write_statement> ::= WRITE "(" <output_list> ")" | NEWLINE
+
+<read_statement> ::= READ "(" <identifier> ")"
+
+<output_list> ::= <value> | <value> "," <output_list>
+
+<conditional> ::= <expression> <comparator> <expression> 
+				| <expression> <comparator> <expression> AND <condtional> 
+				| <expression> <comparator> <expression> OR <conditional>
+				| NOT <conditional>				
+
+<comparator> ::= "=" | ">" | "<" | "<>" | "<=" | ">="
+
+<expression> ::= <term> 				
+				| <term> "+" <expression> 
+				| <term> "-" <expression>
+
+<term> ::= <value> 		  
+		   | <value> "*" <term> 
+		   | <value> "/" <term>
+
+<value> ::= <identifier> | <constant> | "(" <expression> ")"
+
+<constant> ::= <number_constant> | <character_constant>
+
+<character_constant> ::= "’" <character> "’"
+
+<number_constant> ::= <integer> 
+					| <real>					 
+					| "-" <integer> 
+					| "-" <real>					
+
+<identifier> ::= <character> 
+				 | <identifier> <character> 
+				 | <identifier> <digit> 				 
+
+<real> ::= <integer>  "."  <integer>
+
+<integer> ::= <integer> <digit> | <digit>
+
+<character> ::= A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|
+                a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
+
+<digit> ::= 0|1|2|3|4|5|6|7|8|9
+
